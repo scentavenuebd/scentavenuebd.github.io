@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Scent Avenue | Designer, Niche and Middle Eastern Perfumes in Bangladesh</title>
+<meta name="description" content="Shop designer, niche and Middle Eastern perfumes for men and women. Delivery across Bangladesh. Order online or on WhatsApp.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#14122B;
+  --cobalt:#2438FF;
+  --lemon:#FFE45C;
+  --pink:#FF5C9D;
+  --mist:#F4F5FF;
+  --muted:#5B5A72;
+  --line:#DCDDF0;
+  --display:"Bricolage Grotesque","Arial Black",Arial,sans-serif;
+  --body:"DM Sans","Helvetica Neue",Arial,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--body);color:var(--ink);background:#fff;line-height:1.55;font-size:16px}
+a{color:inherit}
+button{font:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--pink);outline-offset:2px}
+.wrap{max-width:1160px;margin:0 auto;padding:0 20px}
+
+.bar{background:var(--ink);color:#fff;font-size:.88rem}
+.bar .wrap{display:flex;gap:8px 28px;justify-content:center;flex-wrap:wrap;padding-top:8px;padding-bottom:8px}
+
+header{position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid var(--line)}
+header .wrap{display:flex;align-items:center;justify-content:space-between;height:68px}
+.logo{font-family:var(--display);font-weight:800;font-size:1.5rem;text-decoration:none;letter-spacing:-.02em}
+.logo i{display:inline-block;width:12px;height:12px;border-radius:50%;background:var(--pink);margin-left:3px}
+.cartbtn{background:var(--cobalt);color:#fff;border:0;border-radius:999px;padding:10px 20px;font-weight:700}
+.cartbtn:hover{background:#1727d6}
+
+.hero{background:var(--lemon);overflow:hidden}
+.hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:20px;align-items:center;padding-top:56px;padding-bottom:56px}
+.hero h1{font-family:var(--display);font-weight:800;font-size:clamp(2.5rem,6.4vw,4.8rem);line-height:1;letter-spacing:-.035em;margin-bottom:18px}
+.hero p{max-width:30em;font-size:1.1rem;margin-bottom:28px}
+.btn{display:inline-block;text-decoration:none;border-radius:999px;padding:14px 26px;font-weight:700;border:2px solid var(--ink)}
+.btn.main{background:var(--ink);color:#fff}
+.btn.main:hover{background:var(--cobalt);border-color:var(--cobalt)}
+.btn.line{background:transparent;margin-left:8px}
+.btn.line:hover{background:#fff}
+.trio{display:flex;align-items:flex-end;justify-content:center;gap:0}
+.trio svg{width:34%;height:auto;display:block}
+.trio svg:nth-child(1){transform:rotate(-8deg) translateX(14px)}
+.trio svg:nth-child(2){width:40%;position:relative;z-index:1;margin-bottom:18px}
+.trio svg:nth-child(3){transform:rotate(8deg) translateX(-14px)}
+@media (prefers-reduced-motion:no-preference){
+  .trio svg{animation:pop .7s cubic-bezier(.2,1.3,.4,1) both}
+  .trio svg:nth-child(2){animation-delay:.12s}
+  .trio svg:nth-child(3){animation-delay:.24s}
+  @keyframes pop{from{opacity:0;translate:0 30px}to{opacity:1;translate:0 0}}
+}
+
+section{padding:64px 0}
+h2{font-family:var(--display);font-weight:800;font-size:clamp(1.9rem,4vw,2.8rem);letter-spacing:-.025em;line-height:1.05;margin-bottom:10px}
+.sub{color:var(--muted);margin-bottom:26px}
+
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:30px}
+.chip{background:#fff;border:2px solid var(--ink);border-radius:999px;padding:8px 18px;font-weight:500}
+.chip:hover{background:var(--mist)}
+.chip[aria-pressed="true"]{background:var(--ink);color:#fff}
+
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.card{display:flex;flex-direction:column;border-radius:22px;overflow:hidden;border:1px solid var(--line);background:#fff}
+.pic{aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;padding:18px}
+.pic svg{height:100%;width:auto}
+.pic img{width:100%;height:100%;object-fit:contain}
+.info{padding:16px 16px 18px;display:flex;flex-direction:column;gap:4px;flex:1}
+.brand{font-size:.85rem;color:var(--muted)}
+.name{font-family:var(--display);font-weight:700;font-size:1.15rem;line-height:1.2}
+.row{display:flex;justify-content:space-between;align-items:baseline;margin-top:4px}
+.price{font-weight:700;font-size:1.1rem}
+.size{font-size:.88rem;color:var(--muted)}
+.tag{align-self:flex-start;font-size:.78rem;font-weight:700;background:var(--mist);color:var(--cobalt);border-radius:999px;padding:3px 10px;margin-top:6px}
+.add{margin-top:auto;background:var(--ink);color:#fff;border:0;border-radius:999px;padding:11px;font-weight:700}
+.add:hover{background:var(--cobalt)}
+.card .info .add{margin-top:12px}
+.empty{padding:30px 0;color:var(--muted)}
+
+.how{background:var(--mist)}
+.cols{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+.cols h3{font-family:var(--display);font-weight:700;font-size:1.25rem;margin-bottom:6px}
+.cols p{color:var(--muted)}
+.cols b{color:var(--ink)}
+
+.cta{background:var(--cobalt);color:#fff;text-align:center}
+.cta p{max-width:32em;margin:0 auto 26px;color:#dfe2ff}
+.cta .btn{background:var(--lemon);border-color:var(--lemon);color:var(--ink)}
+.cta .btn:hover{background:#fff;border-color:#fff}
+footer{background:var(--ink);color:#b9b8d4;padding:26px 0;font-size:.9rem;text-align:center}
+
+/* cart drawer */
+.veil{position:fixed;inset:0;background:rgba(20,18,43,.5);opacity:0;pointer-events:none;transition:opacity .2s;z-index:30}
+.veil.on{opacity:1;pointer-events:auto}
+.drawer{position:fixed;top:0;right:0;height:100%;width:min(440px,100%);background:#fff;z-index:40;transform:translateX(100%);transition:transform .25s;display:flex;flex-direction:column}
+.drawer.on{transform:none}
+.dh{display:flex;justify-content:space-between;align-items:center;padding:18px 20px;border-bottom:1px solid var(--line)}
+.dh h2{font-size:1.5rem;margin:0}
+.x{background:var(--mist);border:0;border-radius:50%;width:38px;height:38px;font-size:1.2rem}
+.db{overflow:auto;padding:16px 20px;flex:1}
+.line-item{display:grid;grid-template-columns:1fr auto;gap:4px 12px;padding:12px 0;border-bottom:1px solid var(--line)}
+.line-item b{font-weight:700}
+.line-item small{color:var(--muted)}
+.qty{display:flex;align-items:center;gap:8px;grid-column:1/-1}
+.qty button{width:30px;height:30px;border-radius:50%;border:1px solid var(--ink);background:#fff;font-weight:700}
+.qty .rm{width:auto;border:0;background:none;color:var(--muted);text-decoration:underline;margin-left:auto}
+.total{display:flex;justify-content:space-between;font-weight:700;font-size:1.15rem;padding:14px 0}
+form label{display:block;font-size:.9rem;font-weight:500;margin-top:10px}
+form input,form select,form textarea{width:100%;padding:11px 12px;border:1.5px solid var(--line);border-radius:12px;font:inherit;margin-top:4px;background:#fff}
+form input:focus,form select:focus,form textarea:focus{border-color:var(--cobalt);outline:0}
+.send{width:100%;margin-top:16px;background:#1faa59;color:#fff;border:0;border-radius:999px;padding:14px;font-weight:700;font-size:1rem}
+.send:hover{background:#178a47}
+.note{font-size:.85rem;color:var(--muted);margin-top:10px}
+
+@media (max-width:900px){
+  .grid{grid-template-columns:repeat(3,1fr)}
+}
+@media (max-width:700px){
+  .hero .wrap{grid-template-columns:1fr;padding-top:36px;padding-bottom:36px}
+  .trio{order:-1;max-width:300px;margin:0 auto}
+  .btn.line{margin-left:0;margin-top:10px}
+  .grid{grid-template-columns:repeat(2,1fr);gap:12px}
+  .cols{grid-template-columns:1fr}
+  section{padding:46px 0}
+}
+</style>
+</head>
+<body>
+
+<div class="bar"><div class="wrap">
+  <span>Dhaka delivery in 1 to 2 days</span>
+  <span>Outside Dhaka up to 7 days</span>
+  <span>Cash on delivery available</span>
+</div></div>
+
+<header><div class="wrap">
+  <a class="logo" href="#top">Scent Avenue<i></i></a>
+  <button class="cartbtn" id="openCart" aria-label="Open cart">Cart (<span id="count">0</span>)</button>
+</div></header>
+
+<main id="top">
+  <div class="hero"><div class="wrap">
+    <div>
+      <h1>Find the scent people ask about.</h1>
+      <p>Designer, niche and Middle Eastern perfumes for men and women. Order here on the website or message us on WhatsApp.</p>
+      <a class="btn main" href="#shop">Shop perfumes</a>
+      <a class="btn line" id="waTop" href="#">Order on WhatsApp</a>
+    </div>
+    <div class="trio" id="trio" aria-hidden="true"></div>
+  </div></div>
+
+  <section id="shop"><div class="wrap">
+    <h2>Shop all perfumes</h2>
+    <p class="sub">Filter by who it is for, or by type.</p>
+    <div class="chips" id="chips" role="group" aria-label="Filter perfumes"></div>
+    <div class="grid" id="grid"></div>
+  </div></section>
+
+  <section class="how" id="info"><div class="wrap">
+    <h2>Delivery and payment</h2>
+    <p class="sub">Simple and clear, so you know what to expect.</p>
+    <div class="cols">
+      <div><h3>Delivery</h3><p><b>Inside Dhaka:</b> 1 to 2 days.<br><b>Outside Dhaka:</b> up to 7 days.<br>Delivery charge is confirmed on WhatsApp.</p></div>
+      <div><h3>Payment</h3><p>Cash on delivery, bKash, or bank transfer. We confirm your order before dispatch.</p></div>
+      <div><h3>How to order</h3><p>Add perfumes to your cart, fill in your address, and send the order. It opens in WhatsApp so we can confirm it with you.</p></div>
+    </div>
+  </div></section>
+
+  <section class="cta"><div class="wrap">
+    <h2>Not sure what to pick?</h2>
+    <p>Tell us what you already wear and your budget. We will suggest a perfume that suits you.</p>
+    <a class="btn" id="waBottom" href="#">Chat on WhatsApp</a>
+  </div></section>
+</main>
+
+<footer><div class="wrap">© 2026 Scent Avenue. All rights reserved.</div></footer>
+
+<div class="veil" id="veil"></div>
+<aside class="drawer" id="drawer" aria-label="Your cart" aria-hidden="true">
+  <div class="dh"><h2>Your cart</h2><button class="x" id="closeCart" aria-label="Close cart">×</button></div>
+  <div class="db">
+    <div id="items"></div>
+    <div class="total"><span>Total</span><span id="sum">৳ 0</span></div>
+    <form id="order">
+      <label>Full name<input name="name" required autocomplete="name"></label>
+      <label>Phone number<input name="phone" type="tel" required autocomplete="tel"></label>
+      <label>Delivery address<textarea name="address" rows="2" required autocomplete="street-address"></textarea></label>
+      <label>Delivery area
+        <select name="area"><option>Inside Dhaka</option><option>Outside Dhaka</option></select>
+      </label>
+      <label>Payment method
+        <select name="pay"><option>Cash on delivery</option><option>bKash</option><option>Bank transfer</option></select>
+      </label>
+      <button class="send" type="submit">Send order on WhatsApp</button>
+      <p class="note">This opens WhatsApp with your order filled in. Press send there and we will confirm it.</p>
+    </form>
+  </div>
+</aside>
+
+<script>
+/* ========= EDIT HERE ========= */
+var WA = "8801410774600";          // WhatsApp number, international format, no + or spaces
+var SHOP = "Scent Avenue";
+
+/* Each perfume. To add a photo, put the file in your repository and set img, for example img:"photos/dior-sauvage.jpg" */
+var PRODUCTS = [
+  {brand:"Brand Name", name:"Fresh Blue",       size:"100 ml", price:12500, tags:["men","designer"],           color:"#2438FF", img:""},
+  {brand:"Brand Name", name:"Rose Bloom",       size:"90 ml",  price:13500, tags:["women","designer"],         color:"#FF5C9D", img:""},
+  {brand:"Brand Name", name:"Midnight Wood",    size:"100 ml", price:11800, tags:["men","designer"],           color:"#7A3CFF", img:""},
+  {brand:"Brand Name", name:"Vanilla Silk",     size:"75 ml",  price:12900, tags:["women","designer"],         color:"#FFB02E", img:""},
+  {brand:"Brand Name", name:"Smoked Iris",      size:"50 ml",  price:28000, tags:["men","niche"],              color:"#00A88F", img:""},
+  {brand:"Brand Name", name:"White Petal",      size:"50 ml",  price:26500, tags:["women","niche"],            color:"#FF7A45", img:""},
+  {brand:"Brand Name", name:"Amber Leather",    size:"100 ml", price:32000, tags:["men","women","niche"],      color:"#B5651D", img:""},
+  {brand:"Brand Name", name:"Pear and Musk",    size:"50 ml",  price:24000, tags:["women","niche"],            color:"#5CC93A", img:""},
+  {brand:"Brand Name", name:"Oud Royale",       size:"100 ml", price:5200,  tags:["men","middle-eastern"],     color:"#5B2A86", img:""},
+  {brand:"Brand Name", name:"Rose Oud",         size:"100 ml", price:4800,  tags:["women","middle-eastern"],   color:"#E0245E", img:""},
+  {brand:"Brand Name", name:"Arabian Amber",    size:"100 ml", price:4500,  tags:["men","women","middle-eastern"], color:"#E8A200", img:""},
+  {brand:"Brand Name", name:"Sweet Musk Attar", size:"12 ml",  price:1800,  tags:["women","middle-eastern"],   color:"#14B8A6", img:""}
+];
+/* ============================== */
+
+var FILTERS = [["all","All"],["men","Men"],["women","Women"],["designer","Designer"],["niche","Niche"],["middle-eastern","Middle Eastern"]];
+var TYPE = {"designer":"Designer","niche":"Niche","middle-eastern":"Middle Eastern"};
+var cart = {}, filter = "all";
+var $ = function(id){return document.getElementById(id)};
+var money = function(n){return "৳ " + n.toLocaleString("en-US")};
+try{ cart = JSON.parse(localStorage.getItem("sa-cart")||"{}"); }catch(e){ cart = {}; }
+
+function bottle(c, i){
+  var shape = i % 3, body;
+  if(shape === 0) body = '<rect x="22" y="62" width="76" height="110" rx="14" fill="'+c+'"/>';
+  else if(shape === 1) body = '<rect x="32" y="56" width="56" height="116" rx="8" fill="'+c+'"/>';
+  else body = '<circle cx="60" cy="120" r="52" fill="'+c+'"/>';
+  return '<svg viewBox="0 0 120 180" aria-hidden="true">'+
+    '<rect x="48" y="14" width="24" height="30" rx="4" fill="#14122B"/>'+
+    '<rect x="53" y="42" width="14" height="20" fill="#14122B" opacity=".75"/>'+body+
+    '<rect x="34" y="78" width="9" height="60" rx="4.5" fill="#fff" opacity=".4"/>'+
+    '<rect x="46" y="112" width="40" height="28" rx="3" fill="#fff" opacity=".92"/>'+
+    '<rect x="51" y="119" width="30" height="4" rx="2" fill="#14122B"/>'+
+    '<rect x="51" y="128" width="20" height="3" rx="1.5" fill="#14122B" opacity=".5"/></svg>';
+}
+
+function waLink(text){ return "https://wa.me/" + WA + "?text=" + encodeURIComponent(text); }
+
+function drawChips(){
+  $("chips").innerHTML = FILTERS.map(function(f){
+    return '<button class="chip" data-f="'+f[0]+'" aria-pressed="'+(filter===f[0])+'">'+f[1]+'</button>';
+  }).join("");
+}
+
+function drawGrid(){
+  var out = PRODUCTS.map(function(p, i){ p.id = i; return p; }).filter(function(p){
+    return filter === "all" || p.tags.indexOf(filter) > -1;
+  });
+  if(!out.length){ $("grid").innerHTML = '<p class="empty">No perfumes in this category yet.</p>'; return; }
+  $("grid").innerHTML = out.map(function(p){
+    var type = p.tags.filter(function(t){return TYPE[t]})[0];
+    var pic = p.img ? '<img src="'+p.img+'" alt="'+p.brand+' '+p.name+'" loading="lazy">' : bottle(p.color, p.id);
+    return '<article class="card"><div class="pic" style="background:'+p.color+'22">'+pic+'</div>'+
+      '<div class="info"><span class="brand">'+p.brand+'</span><h3 class="name">'+p.name+'</h3>'+
+      '<div class="row"><span class="price">'+money(p.price)+'</span><span class="size">'+p.size+'</span></div>'+
+      '<span class="tag">'+TYPE[type]+'</span>'+
+      '<button class="add" data-id="'+p.id+'">Add to cart</button></div></article>';
+  }).join("");
+}
+
+function save(){ try{ localStorage.setItem("sa-cart", JSON.stringify(cart)); }catch(e){} }
+
+function drawCart(){
+  var ids = Object.keys(cart).filter(function(k){return PRODUCTS[k] && cart[k] > 0});
+  var total = 0, n = 0;
+  $("items").innerHTML = ids.length ? ids.map(function(k){
+    var p = PRODUCTS[k], q = cart[k]; total += p.price * q; n += q;
+    return '<div class="line-item"><div><b>'+p.name+'</b><br><small>'+p.brand+', '+p.size+'</small></div>'+
+      '<div>'+money(p.price*q)+'</div>'+
+      '<div class="qty"><button data-m="'+k+'" aria-label="Remove one">−</button><span>'+q+'</span>'+
+      '<button data-p="'+k+'" aria-label="Add one">+</button><button class="rm" data-r="'+k+'">Remove</button></div></div>';
+  }).join("") : '<p class="empty">Your cart is empty. Add a perfume to start.</p>';
+  $("sum").textContent = money(total);
+  $("count").textContent = n;
+  $("order").style.display = ids.length ? "block" : "none";
+}
+
+function openCart(on){
+  $("drawer").classList.toggle("on", on);
+  $("veil").classList.toggle("on", on);
+  $("drawer").setAttribute("aria-hidden", String(!on));
+  if(on) $("closeCart").focus(); else $("openCart").focus();
+}
+
+document.addEventListener("click", function(e){
+  var t = e.target;
+  if(t.dataset.f){ filter = t.dataset.f; drawChips(); drawGrid(); }
+  if(t.dataset.id){ cart[t.dataset.id] = (cart[t.dataset.id]||0) + 1; save(); drawCart(); t.textContent = "Added"; setTimeout(function(){t.textContent="Add to cart"}, 900); }
+  if(t.dataset.p){ cart[t.dataset.p]++; save(); drawCart(); }
+  if(t.dataset.m){ cart[t.dataset.m]--; if(cart[t.dataset.m] < 1) delete cart[t.dataset.m]; save(); drawCart(); }
+  if(t.dataset.r){ delete cart[t.dataset.r]; save(); drawCart(); }
+});
+$("openCart").onclick = function(){ openCart(true); };
+$("closeCart").onclick = $("veil").onclick = function(){ openCart(false); };
+document.addEventListener("keydown", function(e){ if(e.key === "Escape") openCart(false); });
+
+$("order").onsubmit = function(e){
+  e.preventDefault();
+  var f = e.target, lines = [], total = 0;
+  Object.keys(cart).forEach(function(k){
+    var p = PRODUCTS[k]; if(!p) return;
+    total += p.price * cart[k];
+    lines.push(cart[k] + " x " + p.brand + " " + p.name + " (" + p.size + ") = " + money(p.price * cart[k]));
+  });
+  var msg = ["New order from " + SHOP, "", lines.join("\n"), "", "Total: " + money(total) + " (delivery charge to be confirmed)", "",
+    "Name: " + f.name.value, "Phone: " + f.phone.value, "Address: " + f.address.value,
+    "Area: " + f.area.value, "Payment: " + f.pay.value].join("\n");
+  window.open(waLink(msg), "_blank");
+};
+
+$("waTop").href = waLink("Hello " + SHOP + ", I want to order a perfume.");
+$("waBottom").href = waLink("Hello " + SHOP + ", can you help me choose a perfume?");
+$("trio").innerHTML = bottle("#2438FF", 0) + bottle("#FF5C9D", 1) + bottle("#7A3CFF", 2);
+
+drawChips(); drawGrid(); drawCart();
+</script>
+</body>
+</html>
