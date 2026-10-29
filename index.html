@@ -53,7 +53,7 @@ dialog{border:0;padding:0;width:min(640px,calc(100% - 28px));max-height:86vh;ove
 .pol-body{padding:18px 22px 26px;font-size:14px;line-height:1.75;color:#444}.pol-body h3{font-family:var(--serif);color:var(--navy);font-size:17px;margin:16px 0 4px}.pol-body p,.pol-body li{margin-bottom:8px}.pol-body ul{padding-left:20px}.pol-body a{color:#8a6a30}
 @media(max-width:760px){.footer-grid{grid-template-columns:1fr 1fr}.footer-grid>div:first-child{grid-column:1/-1}}
 @media(max-width:760px){header{position:static}#shop,#authentic,#info,.collection{scroll-margin-top:84px}.nav-row .wrap{-webkit-mask-image:linear-gradient(90deg,#000 86%,transparent);mask-image:linear-gradient(90deg,#000 86%,transparent);padding-right:28px}.hero{min-height:700px}.slide:before{height:250px}}
-.fab{display:none;position:fixed;right:14px;bottom:16px;z-index:35;background:var(--navy);color:#fff;border:1px solid var(--gold);padding:13px 20px;font-size:13px;font-weight:700;box-shadow:0 6px 18px rgba(0,0,0,.28)}
+.add.ask{display:block;text-align:center;text-decoration:none;box-sizing:border-box}.fab{display:none;position:fixed;right:14px;bottom:16px;z-index:35;background:var(--navy);color:#fff;border:1px solid var(--gold);padding:13px 20px;font-size:13px;font-weight:700;box-shadow:0 6px 18px rgba(0,0,0,.28)}
 @media(max-width:760px){.fab{display:block}}
 </style>
 </head>
@@ -162,7 +162,28 @@ var PRODUCTS=[
  {brand:"Rayhaan",name:"Azul",size:"100 ml EDP",price:2400,tags:["men","middle-eastern"],color:"#a76b70",img:""},
  {brand:"Rayhaan",name:"Elixir",size:"100 ml EDP",price:2400,tags:["men","middle-eastern"],color:"#a76b70",img:""},
  {brand:"Rayhaan",name:"Lion",size:"100 ml EDP",price:2400,tags:["men","middle-eastern"],color:"#a76b70",img:""},
- {brand:"Rayhaan",name:"Tonquin Giza",size:"100 ml EDP",price:2300,tags:["women","middle-eastern"],color:"#a76b70",img:""}
+ {brand:"Rayhaan",name:"Tonquin Giza",size:"100 ml EDP",price:2300,tags:["women","middle-eastern"],color:"#a76b70",img:""},
+ {brand:"Lattafa",name:"Angham",size:"100 ml",price:0,tags:["men","women","unisex","middle-eastern"],color:"#914d59",img:""},
+ {brand:"Rasasi",name:"Hawas Eclat",size:"100 ml",price:0,tags:["women","middle-eastern"],color:"#914d59",img:""},
+ {brand:"Lattafa",name:"Asad",size:"100 ml",price:0,tags:["men","middle-eastern"],color:"#914d59",img:""},
+ {brand:"Lattafa",name:"Yara Candy",size:"100 ml",price:0,tags:["women","middle-eastern"],color:"#914d59",img:""},
+ {brand:"Lattafa",name:"Yara Pink",size:"100 ml",price:0,tags:["women","middle-eastern"],color:"#914d59",img:""},
+ {brand:"Rayhaan",name:"Tropical Vibe",size:"100 ml",price:0,tags:["men","middle-eastern"],color:"#81583b",img:""},
+ {brand:"Lattafa",name:"Khamrah",size:"100 ml",price:0,tags:["men","women","unisex","middle-eastern"],color:"#914d59",img:""},
+ {brand:"Lattafa",name:"Khamrah Qahwa",size:"100 ml",price:0,tags:["men","women","unisex","middle-eastern"],color:"#914d59",img:""},
+ {brand:"Afnan",name:"9PM",size:"100 ml",price:0,tags:["men","middle-eastern"],color:"#a67b3f",img:""},
+ {brand:"Afnan",name:"9PM Night Out",size:"100 ml",price:0,tags:["men","middle-eastern"],color:"#a67b3f",img:""},
+ {brand:"Armaf",name:"Club de Nuit Intense Man",size:"105 ml EDT",price:0,tags:["men","middle-eastern"],color:"#a76b70",img:""},
+ {brand:"French Avenue",name:"Zenith Blue",size:"100 ml",price:0,tags:["men","middle-eastern"],color:"#61452f",img:""},
+ {brand:"Lattafa",name:"Hayaati Black",size:"100 ml",price:0,tags:["women","middle-eastern"],color:"#914d59",img:""},
+ {brand:"Lattafa",name:"Hayaati Florence",size:"100 ml",price:0,tags:["women","middle-eastern"],color:"#914d59",img:""},
+ {brand:"Armaf",name:"Club de Nuit White Imperiale",size:"105 ml",price:0,tags:["men","women","unisex","middle-eastern"],color:"#a76b70",img:""},
+ {brand:"French Avenue",name:"Atlantis Extrait",size:"100 ml",price:0,tags:["men","middle-eastern"],color:"#61452f",img:""},
+ {brand:"Rayhaan",name:"Nocturno",size:"100 ml",price:0,tags:["men","middle-eastern"],color:"#81583b",img:""},
+ {brand:"Atralia",name:"Absolute Chill",size:"100 ml",price:0,tags:["men","middle-eastern"],color:"#61452f",img:""},
+ {brand:"Rayhaan",name:"Pacific Aura",size:"100 ml",price:0,tags:["men","middle-eastern"],color:"#81583b",img:""},
+ {brand:"Rayhaan",name:"Kiss",size:"100 ml",price:0,tags:["women","middle-eastern"],color:"#81583b",img:""},
+ {brand:"Armaf",name:"Odyssey Homme",size:"100 ml",price:0,tags:["men","middle-eastern"],color:"#a76b70",img:""}
 ];
 /* ========================================================== */
 var FILTERS=[["all","All Products"],["men","For Him"],["women","For Her"],["unisex","Unisex"],["designer","Designer"],["niche","Niche"],["middle-eastern","Middle Eastern"],["gift-set","Gift Sets"],["sale","On Sale"]];
@@ -180,7 +201,7 @@ function drawChips(){$("chips").innerHTML=FILTERS.map(function(f){return '<butto
 function matches(p){var q=query.trim().toLowerCase();return (filter==="all"||p.tags.indexOf(filter)>-1)&&(!q||(p.name+" "+p.brand+" "+p.tags.join(" ")).toLowerCase().indexOf(q)>-1)}
 function drawGrid(){var out=PRODUCTS.filter(matches);$("grid").innerHTML=out.map(function(p){var type=p.tags.filter(function(t){return TYPE[t]})[0],on=wish.indexOf(p.id)>-1,sale=p.old>p.price;
  var pic=p.img?'<img src="'+p.img+'" alt="'+esc(p.brand+" "+p.name)+'" loading="lazy">':bottle(p.color,p.idx);
- return '<article class="card"><div class="pic">'+(sale?'<span class="sale">Sale</span>':'')+'<button class="heart" data-a="heart" data-v="'+p.id+'" aria-pressed="'+on+'" aria-label="'+(on?'Remove from':'Add to')+' wishlist">'+(on?'♥':'♡')+'</button>'+pic+'</div><div class="info"><span class="brand">'+esc(p.brand)+'</span><h3 class="name">'+esc(p.name)+'</h3><div class="row"><span class="price">'+money(p.price)+(sale?'<s>'+money(p.old)+'</s>':'')+'</span><span class="size">'+esc(p.size)+'</span></div><span class="tag">'+(TYPE[type]||"Fragrance")+'</span><button class="add" data-a="add" data-v="'+p.id+'">Add to Cart</button></div></article>'}).join("");
+ return '<article class="card"><div class="pic">'+(sale?'<span class="sale">Sale</span>':'')+''+(p.price?'<button class="heart" data-a="heart" data-v="'+p.id+'" aria-pressed="'+on+'" aria-label="'+(on?'Remove from':'Add to')+' wishlist">'+(on?'♥':'♡')+'</button>':'')+pic+'</div><div class="info"><span class="brand">'+esc(p.brand)+'</span><h3 class="name">'+esc(p.name)+'</h3><div class="row"><span class="price">'+(p.price?money(p.price)+(sale?'<s>'+money(p.old)+'</s>':''):'Price on request')+'</span><span class="size">'+esc(p.size)+'</span></div><span class="tag">'+(TYPE[type]||"Fragrance")+'</span>'+(p.price?'<button class="add" data-a="add" data-v="'+p.id+'">Add to Cart</button>':'<a class="add ask" target="_blank" rel="noopener" href="'+waLink('Hello '+SHOP+', what is the price of '+p.brand+' '+p.name+' ('+p.size+')? ')+'">Ask Price on WhatsApp</a>')+'</div></article>'}).join("");
  $("noResults").textContent=(!query.trim()&&["designer","niche","gift-set","sale"].indexOf(filter)>-1)?"This collection is coming soon. Message us on WhatsApp to request a perfume.":"No perfumes match your search. Try another name or category.";$("noResults").style.display=out.length?"none":"block";$("resultsCount").textContent=out.length+" product"+(out.length===1?"":"s")}
 function cloud(){if(user&&cloudOK&&db)fb.setDoc(fb.doc(db,"users",user.uid),{wish:wish},{merge:true}).catch(function(){})}
 function save(){try{localStorage.setItem("sa-cart",JSON.stringify(cart));localStorage.setItem("sa-wish",JSON.stringify(wish))}catch(e){}cloud()}
@@ -211,7 +232,7 @@ function initAccounts(){if(!FIREBASE_CONFIG.apiKey)return;$("acctBtn").hidden=fa
 document.addEventListener("click",function(e){var t=e.target.closest("[data-f],[data-nav-filter],[data-collection],[data-a]");if(!t)return;var d=t.dataset,v=d.v,a=d.a,f=d.f||d.navFilter||d.collection;
  if(f){filter=f;query="";$("searchInput").value="";$("searchCategory").value=f;drawChips();drawGrid();return}
  if(a==="open"){openPanel(v);return}if(a==="close"){closePanels();return}
- if(a==="add"){cart[v]=(Number(cart[v])||0)+1;save();drawCart();t.textContent="Added to Cart";setTimeout(function(){if(t.isConnected)t.textContent="Add to Cart"},900);return}
+ if(a==="add"&&BY[v]&&BY[v].price){cart[v]=(Number(cart[v])||0)+1;save();drawCart();t.textContent="Added to Cart";setTimeout(function(){if(t.isConnected)t.textContent="Add to Cart"},900);return}
  if(a==="google"){fb.signInWithPopup(auth,new fb.GoogleAuthProvider()).catch(err);return}
  if(a==="create"){var lf=$("loginForm");if(lf.reportValidity())fb.createUserWithEmailAndPassword(auth,lf.email.value,lf.pw.value).catch(err);return}
  if(a==="reset"){var em=$("loginForm").email.value;if(!em){msg("Type your email first, then tap Forgot password.");return}fb.sendPasswordResetEmail(auth,em).then(function(){msg("Password reset email sent. Check your inbox.")},err);return}
