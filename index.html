@@ -113,20 +113,56 @@ var DELIVERY={"Inside Dhaka":70,"Outside Dhaka":120};
 var FIREBASE_CONFIG={apiKey:"AIzaSyAKVYT72ehfJNInh0oufA36mjdIWn8u0nc",authDomain:"scent-avenue-bd.firebaseapp.com",projectId:"scent-avenue-bd",appId:"1:815390635099:web:055fdae6f18380cfdcbb7e"};
 /* Products. old = price before discount (shows a Sale tag). tags: men, women, unisex, designer, niche, middle-eastern, gift-set */
 var PRODUCTS=[
- {brand:"Brand Name",name:"Fresh Blue",size:"100 ml",price:12500,tags:["men","designer"],color:"#233d62",img:""},
- {brand:"Brand Name",name:"Rose Bloom",size:"90 ml",price:13500,old:15500,tags:["women","designer"],color:"#a76b70",img:""},
- {brand:"Brand Name",name:"Midnight Wood",size:"100 ml",price:11800,tags:["men","designer"],color:"#3b3b42",img:""},
- {brand:"Brand Name",name:"Vanilla Silk",size:"75 ml",price:12900,tags:["women","designer"],color:"#b99558",img:""},
- {brand:"Brand Name",name:"Smoked Iris",size:"50 ml",price:28000,tags:["men","niche"],color:"#45594d",img:""},
- {brand:"Brand Name",name:"White Petal",size:"50 ml",price:26500,tags:["women","niche"],color:"#d5b6a5",img:""},
- {brand:"Brand Name",name:"Amber Leather",size:"100 ml",price:32000,tags:["men","women","unisex","niche"],color:"#81583b",img:""},
- {brand:"Brand Name",name:"Pear and Musk",size:"50 ml",price:24000,tags:["women","niche"],color:"#78846b",img:""},
- {brand:"Brand Name",name:"Oud Royale",size:"100 ml",price:5200,old:6500,tags:["men","middle-eastern"],color:"#61452f",img:""},
- {brand:"Brand Name",name:"Rose Oud",size:"100 ml",price:4800,tags:["women","middle-eastern"],color:"#914d59",img:""},
- {brand:"Brand Name",name:"Arabian Amber",size:"100 ml",price:4500,tags:["men","women","unisex","middle-eastern"],color:"#a67b3f",img:""},
- {brand:"Brand Name",name:"Sweet Musk Attar",size:"12 ml",price:1800,tags:["women","middle-eastern"],color:"#7b887b",img:""},
- {brand:"Brand Name",name:"Gift Set for Him",size:"Set of 3",price:15900,old:18500,tags:["men","gift-set"],color:"#233d62",img:""},
- {brand:"Brand Name",name:"Gift Set for Her",size:"Set of 3",price:16500,tags:["women","gift-set"],color:"#a76b70",img:""}
+ {brand:"Lattafa",name:"Angham Second Song",size:"100 ml EDP",price:3800,tags:["women","middle-eastern"],color:"#233d62",img:""},
+ {brand:"Rasasi",name:"Hawas Diva",size:"100 ml EDP",price:2850,tags:["women","middle-eastern"],color:"#914d59",img:""},
+ {brand:"Rasasi",name:"Hawas Ice",size:"100 ml EDP",price:3100,tags:["men","middle-eastern"],color:"#914d59",img:""},
+ {brand:"Lattafa",name:"Asad Bourbon",size:"100 ml EDP",price:2550,tags:["men","middle-eastern"],color:"#233d62",img:""},
+ {brand:"Lattafa",name:"Yara Elixir",size:"100 ml EDP",price:2750,tags:["women","middle-eastern"],color:"#233d62",img:""},
+ {brand:"Armaf",name:"Club de Nuit Women",size:"105 ml EDP",price:3600,tags:["women","middle-eastern"],color:"#61452f",img:""},
+ {brand:"Armaf",name:"Club de Nuit Maleka",size:"100 ml EDP",price:3700,tags:["women","middle-eastern"],color:"#61452f",img:""},
+ {brand:"Lattafa",name:"Dynasty",size:"100 ml EDP",price:2800,tags:["women","middle-eastern"],color:"#233d62",img:""},
+ {brand:"Afnan",name:"Supremacy Collector's Edition",size:"100 ml EDP",price:6900,tags:["men","middle-eastern"],color:"#3b3b42",img:""},
+ {brand:"Lattafa",name:"Musamam White Intense",size:"100 ml EDP",price:4100,tags:["women","middle-eastern"],color:"#233d62",img:""},
+ {brand:"Lattafa",name:"Nebras",size:"100 ml EDP",price:3250,tags:["men","women","unisex","middle-eastern"],color:"#233d62",img:""},
+ {brand:"Lattafa",name:"Nebras Elixir",size:"100 ml EDP",price:3250,tags:["men","women","unisex","middle-eastern"],color:"#233d62",img:""},
+ {brand:"Lattafa",name:"Peace & Love",size:"100 ml EDP",price:4300,tags:["women","middle-eastern"],color:"#233d62",img:""},
+ {brand:"Riiffs",name:"Freeze",size:"100 ml EDP",price:3750,tags:["men","middle-eastern"],color:"#a67b3f",img:""},
+ {brand:"Lattafa",name:"Maahir Legacy",size:"100 ml EDP",price:2900,tags:["men","middle-eastern"],color:"#233d62",img:""},
+ {brand:"French Avenue",name:"Vulcan Feu",size:"100 ml EDP",price:3550,tags:["men","women","unisex","middle-eastern"],color:"#45594d",img:""},
+ {brand:"Rasasi",name:"Hawas Malibu",size:"100 ml EDP",price:2800,tags:["men","middle-eastern"],color:"#914d59",img:""},
+ {brand:"Rasasi",name:"Hawas For Him",size:"100 ml EDP",price:2800,tags:["men","middle-eastern"],color:"#914d59",img:""},
+ {brand:"French Avenue",name:"Liquid Brun",size:"100 ml EDP",price:4000,tags:["men","middle-eastern"],color:"#45594d",img:""},
+ {brand:"Lattafa",name:"Eclaire",size:"100 ml EDP",price:3250,tags:["women","middle-eastern"],color:"#233d62",img:""},
+ {brand:"Armaf",name:"Club de Nuit Untold",size:"105 ml EDP",price:4300,tags:["men","women","unisex","middle-eastern"],color:"#61452f",img:""},
+ {brand:"Rasasi",name:"Hawas Kobra",size:"100 ml EDP",price:2800,tags:["men","middle-eastern"],color:"#914d59",img:""},
+ {brand:"Rasasi",name:"Hawas La Mer",size:"100 ml EDP",price:3600,tags:["men","middle-eastern"],color:"#914d59",img:""},
+ {brand:"Rasasi",name:"Hawas Black",size:"100 ml EDP",price:2900,tags:["men","middle-eastern"],color:"#914d59",img:""},
+ {brand:"Atralia",name:"Absolute Ice",size:"100 ml EDP",price:2780,tags:["men","middle-eastern"],color:"#7b887b",img:""},
+ {brand:"Rayhaan",name:"Aquatica",size:"100 ml EDP",price:2400,tags:["men","middle-eastern"],color:"#a76b70",img:""},
+ {brand:"Khadlaj",name:"Island Dreams",size:"100 ml EDP",price:2900,tags:["men","middle-eastern"],color:"#81583b",img:""},
+ {brand:"Rayhaan",name:"Terra",size:"100 ml EDP",price:2400,tags:["men","middle-eastern"],color:"#a76b70",img:""},
+ {brand:"Khadlaj",name:"Shiyaaka Snow",size:"100 ml EDP",price:2800,tags:["men","women","unisex","middle-eastern"],color:"#81583b",img:""},
+ {brand:"French Avenue",name:"Aromatix Platine Blanc",size:"100 ml EDP",price:4200,tags:["men","women","unisex","middle-eastern"],color:"#45594d",img:""},
+ {brand:"Lattafa",name:"Khamrah Dukhan",size:"100 ml EDP",price:3250,tags:["men","women","unisex","middle-eastern"],color:"#233d62",img:""},
+ {brand:"Rayhaan",name:"Pharaoh",size:"100 ml EDP",price:2400,tags:["men","middle-eastern"],color:"#a76b70",img:""},
+ {brand:"Armaf",name:"Odyssey Go Mango",size:"100 ml EDP",price:2750,tags:["men","women","unisex","middle-eastern"],color:"#61452f",img:""},
+ {brand:"Armaf",name:"Odyssey Dubai Chocolat",size:"100 ml EDP",price:2850,tags:["men","women","unisex","middle-eastern"],color:"#61452f",img:""},
+ {brand:"Armaf",name:"Odyssey Mandarin Sky",size:"100 ml EDP",price:2850,tags:["men","middle-eastern"],color:"#61452f",img:""},
+ {brand:"Lattafa",name:"Al Nashama Caprice",size:"100 ml EDP",price:2850,tags:["men","women","unisex","middle-eastern"],color:"#233d62",img:""},
+ {brand:"Rasasi",name:"Hawas Chrome For Him",size:"100 ml EDP",price:3300,tags:["men","middle-eastern"],color:"#914d59",img:""},
+ {brand:"Rasasi",name:"Hawas Fire",size:"100 ml EDP",price:4800,tags:["men","middle-eastern"],color:"#914d59",img:""},
+ {brand:"Rasasi",name:"Hawas Gold Digger",size:"100 ml EDP",price:3300,tags:["men","women","unisex","middle-eastern"],color:"#914d59",img:""},
+ {brand:"Rasasi",name:"Hawas London",size:"100 ml EDP",price:3700,tags:["men","middle-eastern"],color:"#914d59",img:""},
+ {brand:"Rasasi",name:"Hawas Nautilus",size:"100 ml EDP",price:3600,tags:["men","middle-eastern"],color:"#914d59",img:""},
+ {brand:"Rasasi",name:"Hawas Venom",size:"100 ml EDP",price:3800,tags:["men","middle-eastern"],color:"#914d59",img:""},
+ {brand:"Armaf",name:"Odyssey Candee",size:"100 ml EDP",price:2850,tags:["women","middle-eastern"],color:"#61452f",img:""},
+ {brand:"Armaf",name:"Odyssey Limoni Fresh",size:"100 ml EDP",price:2850,tags:["men","women","unisex","middle-eastern"],color:"#61452f",img:""},
+ {brand:"Armaf",name:"Odyssey Marshmallow",size:"100 ml EDP",price:2750,tags:["men","women","unisex","middle-eastern"],color:"#61452f",img:""},
+ {brand:"Armaf",name:"Odyssey Spectra",size:"100 ml EDP",price:2850,tags:["men","middle-eastern"],color:"#61452f",img:""},
+ {brand:"Rayhaan",name:"Azul",size:"100 ml EDP",price:2400,tags:["men","middle-eastern"],color:"#a76b70",img:""},
+ {brand:"Rayhaan",name:"Elixir",size:"100 ml EDP",price:2400,tags:["men","middle-eastern"],color:"#a76b70",img:""},
+ {brand:"Rayhaan",name:"Lion",size:"100 ml EDP",price:2400,tags:["men","middle-eastern"],color:"#a76b70",img:""},
+ {brand:"Rayhaan",name:"Tonquin Giza",size:"100 ml EDP",price:2300,tags:["women","middle-eastern"],color:"#a76b70",img:""}
 ];
 /* ========================================================== */
 var FILTERS=[["all","All Products"],["men","For Him"],["women","For Her"],["unisex","Unisex"],["designer","Designer"],["niche","Niche"],["middle-eastern","Middle Eastern"],["gift-set","Gift Sets"],["sale","On Sale"]];
@@ -145,7 +181,7 @@ function matches(p){var q=query.trim().toLowerCase();return (filter==="all"||p.t
 function drawGrid(){var out=PRODUCTS.filter(matches);$("grid").innerHTML=out.map(function(p){var type=p.tags.filter(function(t){return TYPE[t]})[0],on=wish.indexOf(p.id)>-1,sale=p.old>p.price;
  var pic=p.img?'<img src="'+p.img+'" alt="'+esc(p.brand+" "+p.name)+'" loading="lazy">':bottle(p.color,p.idx);
  return '<article class="card"><div class="pic">'+(sale?'<span class="sale">Sale</span>':'')+'<button class="heart" data-a="heart" data-v="'+p.id+'" aria-pressed="'+on+'" aria-label="'+(on?'Remove from':'Add to')+' wishlist">'+(on?'♥':'♡')+'</button>'+pic+'</div><div class="info"><span class="brand">'+esc(p.brand)+'</span><h3 class="name">'+esc(p.name)+'</h3><div class="row"><span class="price">'+money(p.price)+(sale?'<s>'+money(p.old)+'</s>':'')+'</span><span class="size">'+esc(p.size)+'</span></div><span class="tag">'+(TYPE[type]||"Fragrance")+'</span><button class="add" data-a="add" data-v="'+p.id+'">Add to Cart</button></div></article>'}).join("");
- $("noResults").style.display=out.length?"none":"block";$("resultsCount").textContent=out.length+" product"+(out.length===1?"":"s")}
+ $("noResults").textContent=(!query.trim()&&["designer","niche","gift-set","sale"].indexOf(filter)>-1)?"This collection is coming soon. Message us on WhatsApp to request a perfume.":"No perfumes match your search. Try another name or category.";$("noResults").style.display=out.length?"none":"block";$("resultsCount").textContent=out.length+" product"+(out.length===1?"":"s")}
 function cloud(){if(user&&cloudOK&&db)fb.setDoc(fb.doc(db,"users",user.uid),{wish:wish},{merge:true}).catch(function(){})}
 function save(){try{localStorage.setItem("sa-cart",JSON.stringify(cart));localStorage.setItem("sa-wish",JSON.stringify(wish))}catch(e){}cloud()}
 function toggleWish(id,on){var i=wish.indexOf(id);if(on===undefined)on=i<0;if(on&&i<0)wish.push(id);if(!on&&i>-1)wish.splice(i,1)}
