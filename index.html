@@ -84,6 +84,15 @@ dialog{border:0;padding:0;width:min(640px,calc(100% - 28px));max-height:86vh;ove
 .nrow{display:flex;flex-wrap:wrap;justify-content:center;gap:22px 28px}.nit{width:92px;text-align:center}.nit b{display:block;font-weight:500;font-size:13.5px;color:#444;margin-top:8px;line-height:1.25;text-transform:capitalize}.nic{width:64px;height:64px;border-radius:12px;border:1px solid;display:inline-flex;align-items:center;justify-content:center}.nic svg{width:34px;height:34px}
 .bhead{display:flex;justify-content:space-between;align-items:baseline}.bhead a{font-size:13px;color:#9a7a3f;font-weight:600}.brandrow{grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}
 @media(max-width:760px){.sortbar{justify-content:stretch}.sortbar label{flex:1 1 100%;justify-content:space-between}.sortbar select{flex:1;max-width:220px}.nit{width:78px}.nic{width:56px;height:56px}}
+
+.pdp-pic{padding:0!important;overflow:hidden}.gal{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;width:100%;height:100%;scrollbar-width:none;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain}.gal::-webkit-scrollbar{display:none}
+.gs{flex:0 0 100%;scroll-snap-align:center;scroll-snap-stop:always;display:flex;align-items:center;justify-content:center;padding:20px;position:relative}.gs img{max-width:100%;max-height:100%;object-fit:contain}.gs svg{width:56%;max-height:92%}.gs.nophoto .pdp-soon{display:block}
+.gdots{display:flex;justify-content:center;gap:8px;margin-top:10px}.gdots i{width:8px;height:8px;border-radius:50%;background:#d6cfbf}.gdots i.on{background:var(--navy)}.onepic .gdots,.onepic .thumbs{display:none}.thumbs button.on{border-color:var(--gold)}
+.glance{margin:2px 0 16px;border:1px solid var(--line);background:#fcfbf8;padding:14px 16px}.glance h4{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#9a7a3f;margin-bottom:10px}.glance .how{font-size:14px;margin:12px 0 10px;color:#444}.uses{display:flex;flex-wrap:wrap;gap:8px 22px;font-size:12.5px;color:var(--muted)}.uses b{display:block;color:var(--navy);font-size:14px}
+.dsec .dbox{margin-top:0}.glance .how{background:none;max-width:none}
+@media(min-width:761px){.gdots{display:none}}
+@media(max-width:760px){.thumbs{display:none}.pdp-pic{aspect-ratio:1/.8}.pdp-box{padding-top:44px}.pdp h2{font-size:22px}.pdp .pprice{font-size:23px;margin-bottom:8px}.meta{margin-bottom:10px}.meta span{font-size:11px;padding:4px 9px}
+.hero{min-height:420px}.slide:before{height:178px}.slide-content{padding:0 0 64px}.hero h1{font-size:27px;line-height:1.12;margin-bottom:0}.hero p{display:none}.hero .eyebrow{margin-bottom:8px;font-size:10px}.hero-actions{display:none}.slider-controls{bottom:18px;right:18px}}
 </style>
 </head>
 <body>
@@ -279,7 +288,7 @@ function gKey(p){return p.tags.indexOf("unisex")>-1?"unisex":p.tags.indexOf("wom
 function conc(p){var m=/(EDP|EDT|Parfum|Extrait)/.exec(p.size||"");return m?m[1]:""}
 function szml(p){return String(p.size||"").replace(/\s*(EDP|EDT|Parfum|Extrait)/,"")}
 function pimg(p,k){return p.img&&!k?p.img:"products/"+p.id+(k?"-"+k:"")+".jpg"}
-function imgTag(p,k,lazy){return '<img class="pimg" src="'+pimg(p,k)+'" data-c="'+p.color+'" data-i="'+p.idx+'" alt="'+esc(p.brand+" "+p.name)+'"'+(lazy?' loading="lazy"':'')+'>'}
+function imgTag(p,k,lazy){return '<img class="pimg" src="'+pimg(p,k)+'" data-k="'+(k||"")+'" data-c="'+p.color+'" data-i="'+p.idx+'" alt="'+esc(p.brand+" "+p.name)+'"'+(lazy?' loading="lazy"':'')+'>'}
 function thumb(p){return imgTag(p,"")}
 function noteRow(l,s){return s?'<p><b>'+l+':</b> '+esc(s)+'</p>':""}
 function pdpHTML(p){var g=gKey(p),c=conc(p),sale=p.old>p.price,n=p.notes||{},type=p.tags.filter(function(t){return TYPE[t]})[0],
@@ -288,24 +297,30 @@ function pdpHTML(p){var g=gKey(p),c=conc(p),sale=p.old>p.price,n=p.notes||{},typ
  var hasN=n.t||n.h||n.b,
  rel=PRODUCTS.filter(function(x){return x.id!==p.id&&x.brand!==p.brand&&x.tags.indexOf(g)>-1}).sort(function(a,b){return (b.brand===p.brand)-(a.brand===p.brand)}).slice(0,4),
  buy=p.price?'<div class="pq"><button data-a="vq-" aria-label="Less">−</button><span>'+pdpQty+'</span><button data-a="vq+" aria-label="More">+</button></div><button class="pbtn" data-a="vadd">Add to Cart</button><button class="pbtn alt" data-a="vbuy">Buy Now</button>':'<a class="pbtn wa" target="_blank" rel="noopener" href="'+waLink("Hello "+SHOP+", what is the price of "+p.brand+" "+p.name+" ("+p.size+")? ")+'">Ask Price on WhatsApp</a>';
- return '<div class="pdp-box"><button class="pdp-x" data-a="vclose" aria-label="Close">×</button><div class="pdp-grid"><div><div class="pdp-pic" id="pdpMain">'+imgTag(p,"")+'<div class="pdp-soon">Photo coming soon</div></div><div class="thumbs"><button data-a="vpic" data-v="'+pimg(p,"")+'" aria-label="Bottle photo"><img class="pimg" src="'+pimg(p,"")+'" alt="Bottle"></button><button data-a="vpic" data-v="'+pimg(p,"box")+'" aria-label="With box photo"><img class="pimg" src="'+pimg(p,"box")+'" alt="With box"></button></div></div><div>'
+ return '<div class="pdp-box"><button class="pdp-x" data-a="vclose" aria-label="Close">×</button><div class="pdp-grid"><div><div class="pdp-pic"><div class="gal" id="gal"><div class="gs">'+imgTag(p,"")+'<div class="pdp-soon">Photo coming soon</div></div><div class="gs" data-box="1">'+imgTag(p,"box")+'</div></div></div><div class="gdots" id="gdots"><i class="on"></i><i></i></div><div class="thumbs"><button class="on" data-a="vpic" data-v="0" aria-label="Bottle photo"><img class="pimg" data-k="" src="'+pimg(p,"")+'" alt="Bottle"></button><button data-a="vpic" data-v="1" aria-label="With box photo"><img class="pimg" data-k="box" src="'+pimg(p,"box")+'" alt="With box"></button></div</div></div><div>'
  +'<div class="crumbs"><a href="#" data-a="vclose">Home</a> / <a href="#" data-a="vshop" data-v="'+g+'">'+(g==="men"?"For Him":g==="women"?"For Her":"Unisex")+'</a> / '+esc(p.brand)+'</div>'
  +'<span class="pbrand">'+esc(p.brand)+'</span><h2>'+esc(p.name)+(c?' '+c:'')+' '+esc(szml(p))+'</h2>'
  +'<div class="pprice">'+(p.price?money(p.price)+(sale?'<s>'+money(p.old)+'</s>':''):'Price on request')+'</div>'
- +'<p class="pdesc">'+esc(desc)+'</p><div class="meta"><span>'+esc(szml(p))+'</span>'+(c?'<span>'+c+'</span>':'')+'<span>'+(g==="men"?"For Men":g==="women"?"For Women":"Unisex")+'</span><span>'+(TYPE[type]||"Fragrance")+'</span></div>'
- +'<div class="buyrow">'+buy+'</div>'
+ +'<div class="meta"><span>'+esc(szml(p))+'</span>'+(c?'<span>'+c+'</span>':'')+'<span>'+(g==="men"?"For Men":g==="women"?"For Women":"Unisex")+'</span><span>'+(TYPE[type]||"Fragrance")+'</span></div>'
+ +(p.acc&&p.acc.length?glance(p):'<p class="pdesc">'+esc(desc)+'</p>')+'<div class="buyrow">'+buy+'</div>'
  +'<div class="buyrow"><a class="pbtn alt" target="_blank" rel="noopener" href="'+waLink("Hello "+SHOP+", I would like to order "+p.brand+" "+p.name+" ("+p.size+").")+'">Order on WhatsApp</a>'+(p.price?'<button class="pbtn alt" data-a="vheart" data-v="'+p.id+'">'+(wish.indexOf(p.id)>-1?"♥ In Wishlist":"♡ Add to Wishlist")+'</button>':'')+'</div>'
- +'<div class="dbox"><h4>Delivery &amp; Returns</h4><div class="dcols"><div class="dcol"><small>Inside Dhaka</small><b>1–2 days</b><small>Delivery charge '+money(DELIVERY["Inside Dhaka"])+'</small></div><div class="dcol"><small>Outside Dhaka</small><b>Up to 7 days</b><small>Delivery charge '+money(DELIVERY["Outside Dhaka"])+'</small></div></div><ul><li>100% authentic, imported from abroad</li><li>3-day return if the package is unopened and the seal is not broken</li><li>Pay by Cash on Delivery, bKash or Bank Transfer (NPSB)</li></ul></div>'
+
  +'</div></div>'
  +detailSections(p)+(rel.length?'<div class="related"><h3>You may also like</h3><div class="rgrid">'+rel.map(function(x){return '<div class="rcard" data-a="view" data-v="'+x.id+'"><div class="rp">'+thumb(x)+'</div><small>'+esc(x.brand)+'</small><b>'+esc(x.name)+'</b><span>'+(x.price?money(x.price):"Price on request")+'</span></div>'}).join("")+'</div></div>':'')
  +'</div>'}
-function openPdp(id,fromHash){var p=BY[id];if(!p)return;closePanels(true);pdpId=id;pdpQty=1;var el=$("pdp");el.innerHTML=pdpHTML(p);el.classList.add("on");el.setAttribute("aria-hidden","false");el.scrollTop=0;document.body.style.overflow="hidden";document.title=p.brand+" "+p.name+" | Scent Avenue Bangladesh";if(!fromHash&&location.hash!=="#p="+id){try{history.pushState(null,"","#p="+id)}catch(e){}}}
+function openPdp(id,fromHash){var p=BY[id];if(!p)return;closePanels(true);pdpId=id;pdpQty=1;var el=$("pdp");galIdx=0;el.classList.remove("onepic");el.innerHTML=pdpHTML(p);el.classList.add("on");initGal();el.setAttribute("aria-hidden","false");el.scrollTop=0;document.body.style.overflow="hidden";document.title=p.brand+" "+p.name+" | Scent Avenue Bangladesh";if(!fromHash&&location.hash!=="#p="+id){try{history.pushState(null,"","#p="+id)}catch(e){}}}
 function closePdp(noHash){var el=$("pdp");if(!pdpId&&!el.classList.contains("on"))return;pdpId=null;el.classList.remove("on");el.setAttribute("aria-hidden","true");document.body.style.overflow="";document.title="Scent Avenue Bangladesh | Discover Your Signature Scent";if(!noHash&&/^#p=/.test(location.hash)){try{history.pushState(null,"",location.pathname+location.search)}catch(e){}}}
-function redrawPdp(){if(pdpId){var el=$("pdp"),st=el.scrollTop;el.innerHTML=pdpHTML(BY[pdpId]);el.scrollTop=st}}
+function redrawPdp(){if(pdpId){var el=$("pdp"),st=el.scrollTop;el.innerHTML=pdpHTML(BY[pdpId]);initGal();el.scrollTop=st}}
 window.addEventListener("hashchange",function(){var m=/^#p=(.+)$/.exec(location.hash);if(m&&BY[m[1]])openPdp(m[1],true);else closePdp(true)});
+function dropBox(){var g=$("gal");if(g){var b=g.querySelector(".gs[data-box]");if(b)b.remove()}var d=$("pdp");if(d)d.classList.add("onepic")}
 document.addEventListener("error",function(e){var im=e.target;if(!im||im.tagName!=="IMG"||!im.classList.contains("pimg"))return;
- if(im.closest(".thumbs")){im.closest("button").hidden=true;return}
- var s=document.createElement("span");s.className="ph";s.innerHTML=bottle(im.dataset.c,Number(im.dataset.i));im.replaceWith(s);var pc=s.closest(".pdp-pic");if(pc)pc.classList.add("nophoto")},true);
+ var box=im.dataset.k==="box";
+ if(im.closest(".thumbs")){im.closest("button").hidden=true;if(box)dropBox();return}
+ if(box&&im.closest(".gs")){dropBox();return}
+ var s=document.createElement("span");s.className="ph";s.innerHTML=bottle(im.dataset.c,Number(im.dataset.i));im.replaceWith(s);var gs=s.closest(".gs");if(gs)gs.classList.add("nophoto")},true);
+var galIdx=0;
+function initGal(){var g=$("gal");if(!g)return;g.scrollLeft=galIdx*g.clientWidth;g.addEventListener("scroll",function(){var i=Math.round(g.scrollLeft/Math.max(1,g.clientWidth));if(i!==galIdx||true){galIdx=i;document.querySelectorAll("#gdots i,.thumbs button").forEach(function(el,k){el.classList.toggle("on",(k%2)===i)})}},{passive:true})}
+
 /* ---------- scent profile, notes, brand row ---------- */
 var WARM=/vanilla|amber|warm spicy|woody|cacao|leather|oud|tobacco|balsamic|smoky|caramel|coffee|honey|gourmand/,COOL=/fresh|citrus|aquatic|green|aromatic|marine|ozonic|mint|lavender|fruity/;
 function useFor(acc){var w=0,c=0;acc.slice(0,6).forEach(function(a,i){var k=i<3?2:1;if(WARM.test(a))w+=k;if(COOL.test(a))c+=k});
@@ -317,11 +332,13 @@ var GLY={citrus:'<circle cx="12" cy="12" r="6.5"/><path d="M12 5.5v13M5.5 12h13M
 function noteIcon(n){var f=fam(n),c=FCOL[f];return '<span class="nic" style="background:'+c+'22;border-color:'+c+'66"><svg viewBox="0 0 24 24" fill="none" stroke="'+c+'" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">'+GLY[f]+'</svg></span>'}
 function noteBand(label,s){if(!s)return"";var l=s.split(/\s*,\s*/).filter(Boolean);return '<div class="nh"><span>'+label+'</span></div><div class="nrow">'+l.map(function(x){return '<div class="nit">'+noteIcon(x)+'<b>'+esc(x)+'</b></div>'}).join("")+'</div>'}
 function detailSections(p){var n=p.notes||{},out="",acc=p.acc;
- if(acc&&acc.length){var u=useFor(acc);out+='<section class="dsec"><h3>Scent profile at a glance</h3><div class="prof"><div><small>Main accords</small><div class="achips">'+acc.slice(0,6).map(function(a){return '<span class="achip">'+esc(a)+'</span>'}).join("")+'</div></div><div class="pgrid"><div><small>Best for</small><b>'+u.t+'</b></div><div><small>Seasons</small><b>'+u.s+'</b></div></div></div>'+(p.how?'<h4>How it smells</h4><p class="how">'+esc(p.how)+'</p>':'')+'<p class="fine">Best-for and season are suggestions based on the scent. Every skin and climate is different.</p></section>'}
  if(n.t||n.h||n.b)out+='<section class="dsec"><h3>Fragrance notes</h3>'+noteBand("Top notes",n.t)+noteBand("Middle notes",n.h)+noteBand("Base notes",n.b)+'</section>';
+ out+='<section class="dsec">'+dboxHTML()+'</section>';
  var same=PRODUCTS.filter(function(x){return x.brand===p.brand&&x.id!==p.id}).slice(0,6);
  if(same.length)out+='<section class="dsec"><div class="bhead"><h3>More from '+esc(p.brand)+'</h3><a href="#" data-a="vbrand" data-v="'+esc(p.brand)+'">View all</a></div><div class="rgrid brandrow">'+same.map(function(x){return '<div class="rcard" data-a="view" data-v="'+x.id+'"><div class="rp">'+thumb(x)+'</div><small>'+esc(x.brand)+'</small><b>'+esc(x.name)+'</b><span>'+(x.price?money(x.price):"Price on request")+'</span></div>'}).join("")+'</div></section>';
  return out}
+function glance(p){var acc=p.acc,u=useFor(acc);return '<div class="glance"><h4>Scent profile at a glance</h4><div class="achips">'+acc.slice(0,6).map(function(a){return '<span class="achip">'+esc(a)+'</span>'}).join("")+'</div>'+(p.how?'<p class="how">'+esc(p.how)+'</p>':'')+'<div class="uses"><span>Best for <b>'+u.t+'</b></span><span>Seasons <b>'+u.s+'</b></span></div></div>'}
+function dboxHTML(){return'<div class="dbox"><h4>Delivery &amp; Returns</h4><div class="dcols"><div class="dcol"><small>Inside Dhaka</small><b>1–2 days</b><small>Delivery charge '+money(DELIVERY["Inside Dhaka"])+'</small></div><div class="dcol"><small>Outside Dhaka</small><b>Up to 7 days</b><small>Delivery charge '+money(DELIVERY["Outside Dhaka"])+'</small></div></div><ul><li>100% authentic, imported from abroad</li><li>3-day return if the package is unopened and the seal is not broken</li><li>Pay by Cash on Delivery, bKash or Bank Transfer (NPSB)</li></ul></div>'}
 function fillBrands(){var b=[];PRODUCTS.forEach(function(p){if(b.indexOf(p.brand)<0)b.push(p.brand)});b.sort();$("brandSel").innerHTML='<option value="all">All brands</option>'+b.map(function(x){return '<option>'+esc(x)+'</option>'}).join("")}
 $("brandSel").addEventListener("change",function(){brandF=this.value;drawGrid()});
 $("sortSel").addEventListener("change",function(){sortBy=this.value;drawGrid()});
@@ -329,7 +346,7 @@ $("sortSel").addEventListener("change",function(){sortBy=this.value;drawGrid()})
 document.addEventListener("click",function(e){var t=e.target.closest("[data-f],[data-nav-filter],[data-collection],[data-a]");if(!t)return;var d=t.dataset,v=d.v,a=d.a,f=d.f||d.navFilter||d.collection;
  if(f){filter=f;query="";$("searchInput").value="";$("searchCategory").value=f;drawChips();drawGrid();return}
  if(a==="view"){if(e.target.closest("a"))e.preventDefault();openPdp(v);return}
- if(a==="vpic"){var pm=$("pdpMain"),pp2=BY[pdpId];pm.classList.remove("nophoto");pm.innerHTML='<img class="pimg" src="'+v+'" data-c="'+pp2.color+'" data-i="'+pp2.idx+'" alt=""><div class="pdp-soon">Photo coming soon</div>';return}
+ if(a==="vpic"){var gl=$("gal");gl.scrollTo({left:Number(v)*gl.clientWidth,behavior:"smooth"});return}
  if(a==="vbrand"){e.preventDefault();closePdp();brandF=v;filter="all";query="";$("searchInput").value="";$("brandSel").value=v;drawChips();drawGrid();$("shop").scrollIntoView({behavior:"smooth"});return}
  if(a==="vclose"){e.preventDefault();closePdp();return}
  if(a==="vshop"){e.preventDefault();closePdp();filter=v;query="";$("searchInput").value="";drawChips();drawGrid();$("shop").scrollIntoView({behavior:"smooth"});return}
