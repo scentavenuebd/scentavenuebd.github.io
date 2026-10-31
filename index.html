@@ -106,6 +106,12 @@ header{border-bottom:0}.head-main{min-height:0;padding:8px 0;gap:8px}.logo-img{h
 .hero-actions{display:flex!important}.hero-actions .btn{min-height:34px;padding:0 12px;font-size:10.5px;letter-spacing:.05em}.hero-actions .btn:nth-child(2){display:none}
 .slider-controls{left:16px!important;right:auto!important;bottom:12px!important}.slide-arrow,.slide-count{display:none!important}
 }
+
+.sugg{position:fixed;z-index:58;background:#fff;border:1px solid #d9d2c3;box-shadow:0 14px 34px rgba(20,33,61,.18);max-height:min(70vh,460px);overflow-y:auto;border-radius:3px}.sugg[hidden]{display:none}
+.sg-it{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:#fff;border:0;border-bottom:1px solid #f0ece3;padding:8px 12px;cursor:pointer}.sg-it:hover,.sg-it.on{background:var(--cream)}
+.sg-img{width:46px;height:46px;flex:0 0 46px;background:var(--cream);display:flex;align-items:center;justify-content:center;overflow:hidden}.sg-img img{max-width:100%;max-height:100%;object-fit:contain}.sg-img svg{width:60%}
+.sg-tx{flex:1;min-width:0}.sg-tx small{display:block;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#9a7a3f}.sg-tx b{display:block;font-size:14px;color:var(--navy);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.sg-pr{font-size:13px;font-weight:700;color:#b58a3c;white-space:nowrap}
+.sg-all{display:block;width:100%;background:var(--navy);color:#fff;border:0;padding:11px;font-size:12px;letter-spacing:.08em;text-transform:uppercase;font-weight:600}.sg-none{padding:16px;font-size:14px;color:#666}
 </style>
 </head>
 <body>
@@ -398,6 +404,36 @@ $("waTop").href=waLink("Hello "+SHOP+", I'd like help finding a perfume.");$("wa
 var slides=Array.from(document.querySelectorAll(".slide")),dots=Array.from(document.querySelectorAll(".dot")),slideIndex=0,slideTimer;function showSlide(n){slideIndex=(n+slides.length)%slides.length;slides.forEach(function(s,i){s.classList.toggle("active",i===slideIndex);s.setAttribute("aria-hidden",String(i!==slideIndex))});dots.forEach(function(d,i){d.classList.toggle("active",i===slideIndex)});$("slideCount").textContent=String(slideIndex+1).padStart(2,"0")+" / "+String(slides.length).padStart(2,"0")}function restartSlider(){clearInterval(slideTimer);if(!window.matchMedia("(prefers-reduced-motion: reduce)").matches)slideTimer=setInterval(function(){showSlide(slideIndex+1)},6500)}$("prevSlide").onclick=function(){showSlide(slideIndex-1);restartSlider()};$("nextSlide").onclick=function(){showSlide(slideIndex+1);restartSlider()};dots.forEach(function(d){d.onclick=function(){showSlide(Number(d.dataset.slide));restartSlider()}});$("slides").addEventListener("mouseenter",function(){clearInterval(slideTimer)});$("slides").addEventListener("mouseleave",restartSlider);
 $("order").area.innerHTML=areaOpts();
 payNote();document.querySelectorAll(".wa-link").forEach(function(a){a.href=waLink("Hello "+SHOP+", I have a question.")});
+
+/* ---------- search suggestions (forgives small spelling mistakes) ---------- */
+var sg=document.createElement("div");sg.id="sugg";sg.className="sugg";sg.setAttribute("role","listbox");sg.hidden=true;document.body.appendChild(sg);var sgItems=[],sgActive=-1;
+function norm(s){return String(s).toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"").replace(/[^a-z0-9 ]+/g," ").replace(/\s+/g," ").trim()}
+function lev(a,b){var m=a.length,n=b.length;if(Math.abs(m-n)>2)return 9;var d=[],i,j;for(i=0;i<=m;i++){d[i]=[i]}for(j=1;j<=n;j++)d[0][j]=j;for(i=1;i<=m;i++)for(j=1;j<=n;j++)d[i][j]=Math.min(d[i-1][j]+1,d[i][j-1]+1,d[i-1][j-1]+(a[i-1]===b[j-1]?0:1));return d[m][n]}
+function sgScore(p,qt){var text=norm(p.brand+" "+p.name),toks=text.split(" "),total=0;
+ for(var i=0;i<qt.length;i++){var q=qt[i],best=0;
+  if(toks.some(function(t){return t===q}))best=4;else if(toks.some(function(t){return t.indexOf(q)===0}))best=3.2;else if(text.indexOf(q)>-1)best=2.4;
+  else if(q.length>=3){var lim=q.length>=6?2:1;toks.forEach(function(t){var dd=Math.min(lev(q,t),lev(q,t.slice(0,q.length)));if(dd<=lim)best=Math.max(best,1.6-dd*.3)})}
+  if(!best)return 0;total+=best}
+ return total}
+function sgFind(v){var qt=norm(v).split(" ").filter(Boolean);if(!qt.length)return[];var r=[];PRODUCTS.forEach(function(p){var s=sgScore(p,qt);if(s>0)r.push([s,p])});r.sort(function(a,b){return b[0]-a[0]||a[1].idx-b[1].idx});return r.map(function(x){return x[1]})}
+function sgPlace(){var f=$("searchForm").getBoundingClientRect(),w=Math.min(f.width,window.innerWidth-16);sg.style.left=Math.max(8,f.left)+"px";sg.style.top=(f.bottom+4)+"px";sg.style.width=w+"px"}
+function sgHide(){sg.hidden=true;sgActive=-1}
+function sgRender(){var v=$("searchInput").value;if(norm(v).length<1){sgHide();return}
+ var all=sgFind(v);sgItems=all.slice(0,7);
+ if(!sgItems.length){sg.innerHTML='<div class="sg-none">No perfume found for "'+esc(v)+'". Try another spelling, or ask us on WhatsApp.</div>'}
+ else sg.innerHTML=sgItems.map(function(p,i){return '<button type="button" class="sg-it" role="option" data-i="'+i+'"><span class="sg-img">'+thumb(p)+'</span><span class="sg-tx"><small>'+esc(p.brand)+'</small><b>'+esc(p.name)+'</b></span><span class="sg-pr">'+(p.price?money(p.price):"Ask price")+'</span></button>'}).join("")+(all.length>sgItems.length?'<button type="button" class="sg-all">See all '+all.length+' results</button>':'');
+ sgActive=-1;sgPlace();sg.hidden=false}
+function sgPick(i){var p=sgItems[i];if(!p)return;sgHide();$("searchInput").blur();openPdp(p.id)}
+$("searchInput").addEventListener("input",sgRender);
+$("searchInput").addEventListener("focus",sgRender);
+$("searchInput").addEventListener("keydown",function(e){if(sg.hidden||!sgItems.length)return;var n=sgItems.length;
+ if(e.key==="ArrowDown"){e.preventDefault();sgActive=(sgActive+1)%n}else if(e.key==="ArrowUp"){e.preventDefault();sgActive=(sgActive-1+n)%n}else if(e.key==="Enter"&&sgActive>-1){e.preventDefault();sgPick(sgActive);return}else if(e.key==="Escape"){sgHide();return}else return;
+ sg.querySelectorAll(".sg-it").forEach(function(el,i){el.classList.toggle("on",i===sgActive);if(i===sgActive)el.scrollIntoView({block:"nearest"})})});
+sg.addEventListener("mousedown",function(e){e.preventDefault()});
+sg.addEventListener("click",function(e){var it=e.target.closest(".sg-it");if(it){sgPick(Number(it.dataset.i));return}if(e.target.closest(".sg-all")){sgHide();$("searchInput").blur();$("shop").scrollIntoView({behavior:"smooth"})}});
+document.addEventListener("click",function(e){if(!sg.hidden&&!e.target.closest("#sugg,#searchForm"))sgHide()});
+$("searchForm").addEventListener("submit",sgHide);
+window.addEventListener("resize",function(){if(!sg.hidden)sgPlace()});window.addEventListener("scroll",function(){if(!sg.hidden)sgPlace()},{passive:true});
 /* Swipe the hero on touch screens */
 (function(){var hero=document.querySelector(".hero"),x0=0,y0=0,t0=0,on=false;
  hero.addEventListener("touchstart",function(e){var t=e.touches[0];x0=t.clientX;y0=t.clientY;t0=Date.now();on=true},{passive:true});
