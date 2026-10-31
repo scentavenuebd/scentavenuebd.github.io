@@ -97,7 +97,7 @@ dialog{border:0;padding:0;width:min(640px,calc(100% - 28px));max-height:86vh;ove
 .pimg{mix-blend-mode:multiply}
 @media(max-width:760px){
 header{border-bottom:0}.head-main{min-height:0;padding:8px 0;gap:8px}.logo-img{height:44px}.head-actions .cartbtn{padding:8px 9px;font-size:11.5px}.search-form{min-height:40px;grid-template-columns:minmax(80px,1fr) 108px 74px}.search-input{font-size:13px}.nav-row .wrap{min-height:36px}
-.hero{min-height:0!important;height:235px}
+.hero{min-height:0!important;height:235px;touch-action:pan-y}
 .slide{align-items:center!important}
 .slide:before{left:auto!important;right:0!important;top:0;bottom:0;width:62%!important;height:100%!important;background-position:center 35%!important;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 38%)!important;mask-image:linear-gradient(90deg,transparent 0,#000 38%)!important}
 .slide:after{display:none!important}
@@ -398,6 +398,10 @@ $("waTop").href=waLink("Hello "+SHOP+", I'd like help finding a perfume.");$("wa
 var slides=Array.from(document.querySelectorAll(".slide")),dots=Array.from(document.querySelectorAll(".dot")),slideIndex=0,slideTimer;function showSlide(n){slideIndex=(n+slides.length)%slides.length;slides.forEach(function(s,i){s.classList.toggle("active",i===slideIndex);s.setAttribute("aria-hidden",String(i!==slideIndex))});dots.forEach(function(d,i){d.classList.toggle("active",i===slideIndex)});$("slideCount").textContent=String(slideIndex+1).padStart(2,"0")+" / "+String(slides.length).padStart(2,"0")}function restartSlider(){clearInterval(slideTimer);if(!window.matchMedia("(prefers-reduced-motion: reduce)").matches)slideTimer=setInterval(function(){showSlide(slideIndex+1)},6500)}$("prevSlide").onclick=function(){showSlide(slideIndex-1);restartSlider()};$("nextSlide").onclick=function(){showSlide(slideIndex+1);restartSlider()};dots.forEach(function(d){d.onclick=function(){showSlide(Number(d.dataset.slide));restartSlider()}});$("slides").addEventListener("mouseenter",function(){clearInterval(slideTimer)});$("slides").addEventListener("mouseleave",restartSlider);
 $("order").area.innerHTML=areaOpts();
 payNote();document.querySelectorAll(".wa-link").forEach(function(a){a.href=waLink("Hello "+SHOP+", I have a question.")});
+/* Swipe the hero on touch screens */
+(function(){var hero=document.querySelector(".hero"),x0=0,y0=0,t0=0,on=false;
+ hero.addEventListener("touchstart",function(e){var t=e.touches[0];x0=t.clientX;y0=t.clientY;t0=Date.now();on=true},{passive:true});
+ hero.addEventListener("touchend",function(e){if(!on)return;on=false;var t=e.changedTouches[0],dx=t.clientX-x0,dy=t.clientY-y0;if(Math.abs(dx)>40&&Math.abs(dx)>Math.abs(dy)*1.3&&Date.now()-t0<900){showSlide(slideIndex+(dx<0?1:-1));restartSlider()}},{passive:true})})();
 fillBrands();drawChips();drawGrid();drawCart();drawWish();drawAcct();restartSlider();initAccounts();
 (function(){var m=/^#p=(.+)$/.exec(location.hash);if(m&&BY[m[1]])openPdp(m[1],true)})();
 </script>
