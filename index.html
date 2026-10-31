@@ -93,6 +93,19 @@ dialog{border:0;padding:0;width:min(640px,calc(100% - 28px));max-height:86vh;ove
 @media(min-width:761px){.gdots{display:none}}
 @media(max-width:760px){.thumbs{display:none}.pdp-pic{aspect-ratio:1/.8}.pdp-box{padding-top:44px}.pdp h2{font-size:22px}.pdp .pprice{font-size:23px;margin-bottom:8px}.meta{margin-bottom:10px}.meta span{font-size:11px;padding:4px 9px}
 .hero{min-height:420px}.slide:before{height:178px}.slide-content{padding:0 0 64px}.hero h1{font-size:27px;line-height:1.12;margin-bottom:0}.hero p{display:none}.hero .eyebrow{margin-bottom:8px;font-size:10px}.hero-actions{display:none}.slider-controls{bottom:18px;right:18px}}
+
+.pimg{mix-blend-mode:multiply}
+@media(max-width:760px){
+header{border-bottom:0}.head-main{min-height:0;padding:8px 0;gap:8px}.logo-img{height:44px}.head-actions .cartbtn{padding:8px 9px;font-size:11.5px}.search-form{min-height:40px;grid-template-columns:minmax(80px,1fr) 108px 74px}.search-input{font-size:13px}.nav-row .wrap{min-height:36px}
+.hero{min-height:0!important;height:235px}
+.slide{align-items:center!important}
+.slide:before{left:auto!important;right:0!important;top:0;bottom:0;width:62%!important;height:100%!important;background-position:center 35%!important;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 38%)!important;mask-image:linear-gradient(90deg,transparent 0,#000 38%)!important}
+.slide:after{display:none!important}
+.slide-content{width:calc(100% - 32px)!important;padding:0!important;max-width:60%;margin:0 0 0 16px!important}
+.hero .eyebrow{display:none}.hero h1{font-size:23px!important;line-height:1.15;margin:0 0 12px!important}.hero p{display:none!important}
+.hero-actions{display:flex!important}.hero-actions .btn{min-height:34px;padding:0 12px;font-size:10.5px;letter-spacing:.05em}.hero-actions .btn:nth-child(2){display:none}
+.slider-controls{left:16px!important;right:auto!important;bottom:12px!important}.slide-arrow,.slide-count{display:none!important}
+}
 </style>
 </head>
 <body>
@@ -297,7 +310,7 @@ function pdpHTML(p){var g=gKey(p),c=conc(p),sale=p.old>p.price,n=p.notes||{},typ
  var hasN=n.t||n.h||n.b,
  rel=PRODUCTS.filter(function(x){return x.id!==p.id&&x.brand!==p.brand&&x.tags.indexOf(g)>-1}).sort(function(a,b){return (b.brand===p.brand)-(a.brand===p.brand)}).slice(0,4),
  buy=p.price?'<div class="pq"><button data-a="vq-" aria-label="Less">−</button><span>'+pdpQty+'</span><button data-a="vq+" aria-label="More">+</button></div><button class="pbtn" data-a="vadd">Add to Cart</button><button class="pbtn alt" data-a="vbuy">Buy Now</button>':'<a class="pbtn wa" target="_blank" rel="noopener" href="'+waLink("Hello "+SHOP+", what is the price of "+p.brand+" "+p.name+" ("+p.size+")? ")+'">Ask Price on WhatsApp</a>';
- return '<div class="pdp-box"><button class="pdp-x" data-a="vclose" aria-label="Close">×</button><div class="pdp-grid"><div><div class="pdp-pic"><div class="gal" id="gal"><div class="gs">'+imgTag(p,"")+'<div class="pdp-soon">Photo coming soon</div></div><div class="gs" data-box="1">'+imgTag(p,"box")+'</div></div></div><div class="gdots" id="gdots"><i class="on"></i><i></i></div><div class="thumbs"><button class="on" data-a="vpic" data-v="0" aria-label="Bottle photo"><img class="pimg" data-k="" src="'+pimg(p,"")+'" alt="Bottle"></button><button data-a="vpic" data-v="1" aria-label="With box photo"><img class="pimg" data-k="box" src="'+pimg(p,"box")+'" alt="With box"></button></div</div></div><div>'
+ return '<div class="pdp-box"><button class="pdp-x" data-a="vclose" aria-label="Close">×</button><div class="pdp-grid"><div><div class="pdp-pic"><div class="gal" id="gal"><div class="gs">'+imgTag(p,"")+'<div class="pdp-soon">Photo coming soon</div></div><div class="gs" data-box="1">'+imgTag(p,"box")+'</div></div></div><div class="gdots" id="gdots"><i class="on"></i><i></i></div><div class="thumbs"><button class="on" data-a="vpic" data-v="0" aria-label="Bottle photo"><img class="pimg" data-k="" src="'+pimg(p,"")+'" alt="Bottle"></button><button data-a="vpic" data-v="1" aria-label="With box photo"><img class="pimg" data-k="box" src="'+pimg(p,"box")+'" alt="With box"></button></div></div><div>'
  +'<div class="crumbs"><a href="#" data-a="vclose">Home</a> / <a href="#" data-a="vshop" data-v="'+g+'">'+(g==="men"?"For Him":g==="women"?"For Her":"Unisex")+'</a> / '+esc(p.brand)+'</div>'
  +'<span class="pbrand">'+esc(p.brand)+'</span><h2>'+esc(p.name)+(c?' '+c:'')+' '+esc(szml(p))+'</h2>'
  +'<div class="pprice">'+(p.price?money(p.price)+(sale?'<s>'+money(p.old)+'</s>':''):'Price on request')+'</div>'
