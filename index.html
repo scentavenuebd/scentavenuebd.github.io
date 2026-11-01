@@ -96,7 +96,7 @@ dialog{border:0;padding:0;width:min(640px,calc(100% - 28px));max-height:86vh;ove
 
 .pimg{mix-blend-mode:multiply}
 @media(max-width:760px){
-header{border-bottom:0}.head-main{min-height:0;padding:8px 0;gap:8px}.logo-img{height:44px}.head-actions .cartbtn{padding:8px 9px;font-size:11.5px}.search-form{min-height:40px;grid-template-columns:minmax(80px,1fr) 108px 74px}.search-input{font-size:13px}.nav-row .wrap{min-height:36px}
+header{border-bottom:0}.head-main{min-height:0;padding:8px 0;gap:8px}.logo-img{height:62px}.head-actions .cartbtn{padding:8px 9px;font-size:11.5px}.search-form{min-height:40px;grid-template-columns:minmax(80px,1fr) 108px 74px}.search-input{font-size:13px}.nav-row .wrap{min-height:36px}
 .hero{min-height:0!important;height:235px;touch-action:pan-y}
 .slide{align-items:center!important}
 .slide:before{left:auto!important;right:0!important;top:0;bottom:0;width:62%!important;height:100%!important;background-position:center 35%!important;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 38%)!important;mask-image:linear-gradient(90deg,transparent 0,#000 38%)!important}
@@ -150,7 +150,7 @@ header{border-bottom:0}.head-main{min-height:0;padding:8px 0;gap:8px}.logo-img{h
 <div class="announcement">AUTHENTIC FRAGRANCES <span aria-hidden="true">✦</span> <strong>DELIVERY THROUGHOUT BANGLADESH</strong></div>
 <header>
   <div class="wrap head-main">
-    <a class="logo" href="#top" aria-label="Scent Avenue Bangladesh home"><img class="logo-img" src="logo.png" alt="Scent Avenue Bangladesh" width="133" height="80"></a>
+    <a class="logo" href="./" id="logoHome" aria-label="Scent Avenue Bangladesh home"><img class="logo-img" src="logo.png" alt="Scent Avenue Bangladesh" width="133" height="80"></a>
     <form class="search-form" id="searchForm" role="search">
       <input class="search-input" id="searchInput" type="search" placeholder="Search perfumes or brands..." aria-label="Search perfumes or brands">
       <select class="search-category" id="searchCategory" aria-label="Select perfume category"><option value="all">All categories</option><option value="men">For Men</option><option value="women">For Women</option><option value="unisex">Unisex</option><option value="designer">Designer</option><option value="niche">Niche</option><option value="middle-eastern">Middle Eastern</option><option value="gift-set">Gift Sets</option><option value="sale">On Sale</option></select>
@@ -707,5 +707,6 @@ window.addEventListener("resize",function(){if(!sg.hidden)sgPlace()});window.add
 fillBrands();drawChips();drawGrid();drawCart();drawWish();drawAcct();restartSlider();initAccounts();
 (function(){var m=/^#p=(.+)$/.exec(location.hash);if(m&&BY[m[1]])openPdp(m[1],true)})();
 </script>
+<script>document.getElementById("logoHome").addEventListener("click",function(e){if(e.metaKey||e.ctrlKey||e.shiftKey||e.button)return;e.preventDefault();try{history.replaceState(null,"",location.pathname+location.search)}catch(x){}window.scrollTo(0,0);location.reload()});</script>
 </body>
 </html>
